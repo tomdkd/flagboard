@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "uuid": "f1418788-e9e0-41d7-bc32-428e15195cef",
+        "name": "toto",
+        "legal_name": "toto",
+        "siret": null,
+        "address": null,
+        "city": null,
+        "postal_code": null,
+        "country": null,
+        "phone": null,
+        "website": null,
+        "is_active": true,
+        "updated_at": null,
+        "created_at": "2025-07-18T22:49:11.817Z"
+    }
+]
