@@ -1,29 +1,77 @@
 name: CI
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
-  lint-and-test:
+  build:
     runs-on: ubuntu-latest
-
+    outputs:
+      pnpm-store-path: ${{ steps.pnpm-cache.outputs.store-path }}
     steps:
-      - name: 📥 Checkout repository
+      - name: 🧾 Checkout
         uses: actions/checkout@v3
 
-      - name: ⚙️ Setup Node.js
+      - name: 🛠 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 📦 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
+          cache: 'pnpm'
 
-      - name: 📦 Install dependencies
+      - name: 📥 Install dependencies
         run: pnpm install
 
-      - name: 🧹 Run linter
-        run: pnpm run lint
+  lint:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 🧾 Checkout
+        uses: actions/checkout@v3
+
+      - name: 🛠 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      - name: 🔍 Run linter
+        run: pnpm lint
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 🧾 Checkout
+        uses: actions/checkout@v3
+
+      - name: 🛠 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: 📥 Install dependencies
+        run: pnpm install
 
       - name: 🧪 Run tests
-        run: pnpm run test
+        run: pnpm test

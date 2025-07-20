@@ -1,5 +1,8 @@
 # 🏳️ Flagboard
 
+[![CI Status](https://github.com/tomdkd/flagboard/actions/workflows/ci.yml/badge.svg)](https://github.com/ton-user/flagboard/actions/workflows/ci.yml)
+[![version](https://img.shields.io/badge/version-1.0.0-blue.svg)](./package.json)
+
 **Flagboard** est une base de travail prête à l’emploi pour développer des applications **multi-tenant** avec :
 - 🔥 Backend [Hono](https://hono.dev/) (TypeScript)
 - 🐘 Base de données PostgreSQL (via Drizzle ORM)
@@ -34,6 +37,6 @@ Ce projet a été conçu pour démarrer rapidement une app **multi-tenant** en i
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/ton-user/flagboard.git
+git clone https://github.com/tomdkd/flagboard.git
 cd flagboard
 npm install
