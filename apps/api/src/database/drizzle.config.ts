@@ -10,8 +10,8 @@ const connectionString = `postgres://${process.env.POSTGRES_USER}:${process.env.
 
 export default defineConfig({
     dialect: "postgresql",
-    schema: path.resolve(__dirname, "./schemas"),
-    out: path.resolve(__dirname, "./migrations"),
+    schema: './src/database/schemas',
+    out: './src/database/migrations',
     dbCredentials: {
         url: connectionString,
     }
