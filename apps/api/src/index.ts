@@ -1,13 +1,19 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import tenantsRoutes from './routes/tenants.routes';
 import { logger } from './config/logger';
+import tenantsRoutes from './routes/tenants.routes';
+import usersRoutes from './routes/users.routes';
 
 const app = new Hono();
 
 app.route('/api/tenants', tenantsRoutes);
+app.route('/api/users', usersRoutes);
 
 tenantsRoutes.routes.forEach((route) => {
+  logger.info(`Registering route: ${route.method} ${app.routes[0].path}${route.path}`);
+})
+
+usersRoutes.routes.forEach((route) => {
   logger.info(`Registering route: ${route.method} ${app.routes[0].path}${route.path}`);
 })
 
