@@ -1,35 +1,35 @@
 import { eq } from "drizzle-orm";
 import { database } from "../../database/database";
-import { tenantsTable } from "../../database/schemas/tenants.table";
+import { tenantTable } from "../../database/schemas/tenant.table";
 import Tenant from "../interfaces/tenant.interface";
 
 export default class TenantRepository {
     private readonly databaseinstance = database;
 
-    async create(tenant: typeof tenantsTable.$inferInsert) {
+    async create(tenant: typeof tenantTable.$inferInsert) {
         return await this.databaseinstance
-            .insert(tenantsTable)
+            .insert(tenantTable)
             .values(tenant);
     }
 
     async getAll(): Promise<Tenant[]> {
         return await this.databaseinstance
             .select()
-            .from(tenantsTable) as Tenant[];
+            .from(tenantTable) as Tenant[];
     }
 
-    async update(id: number, tenant: Partial<typeof tenantsTable.$inferInsert>) {
+    async update(id: number, tenant: Partial<typeof tenantTable.$inferInsert>) {
         return await this.databaseinstance
-            .update(tenantsTable)
+            .update(tenantTable)
             .set(tenant)
-            .where(eq(tenantsTable.id, id));
+            .where(eq(tenantTable.id, id));
     }
 
     async findById(id: number): Promise<Tenant | null> {
         return await this.databaseinstance
             .select()
-            .from(tenantsTable)
-            .where(eq(tenantsTable.id, id))
+            .from(tenantTable)
+            .where(eq(tenantTable.id, id))
             .then((result) => {
                 const row = result[0];
                 if (!row) return null;
@@ -39,7 +39,7 @@ export default class TenantRepository {
 
     async delete(id: number) {
         return await this.databaseinstance
-            .delete(tenantsTable)
-            .where(eq(tenantsTable.id, id));
+            .delete(tenantTable)
+            .where(eq(tenantTable.id, id));
     }
 }
